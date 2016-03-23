@@ -1,16 +1,31 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
 
-  p register or login
-  p
-    input#username(placeholder='user name', value='u0001')
-  p
-    input#password(placeholder='password', type='password', value='foobar')
-  p
-    button#login login
+
+  p bada bingo flamingo
+  table(border=1, width='100%')
+    tr
+      td(colspan=3)
+        h1= title
+    tr
+      td(colspan=3)
+        p Bahaha #{title}
+    tr
+      td(width="10%")
+        p
+          input#username(placeholder='user name', value='u0001')
+        p
+          input#password(placeholder='password', type='password', value='foobar')
+        p
+          button#login bufferpuffer
+      td
+        div
+          full event list
+          p
+            button#show show
+      td
+
 
   script(type='text/javascript')(src='javascripts/jquery-1.12.2.min.js')
   script(type='text/javascript')(src='javascripts/main.js')

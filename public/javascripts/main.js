@@ -23,4 +23,16 @@ $(function(){
       console.log( "complete", e );
     });
   });
+
+  $("#show").on("click", function(event){
+    $.get("/api").done(function(data) {
+      console.log( data );
+    });
+    $.get("/api/events").done(function(data) {
+      console.log( data );
+    });
+    $.get("/api/games").done(function(data) {
+      console.log( data );
+    });
+  });
 })
