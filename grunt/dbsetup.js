@@ -4,21 +4,23 @@ var knex = require('knex')({
   client: 'mysql',
   connection: {
     host     : '127.0.0.1',
-    user     : 'deveedutta',
+    // user     : 'deveedutta',
+    user     : 'root',
     password : '',
-    database : 'sattabazi'
+    database : 'new_schema'
     // ,
     // debug    : true
   }
 });
 
 
-var sampleDataPath = path.join(__dirname, "../dbfixtures/events.js");
-var sampledata = require(sampleDataPath);
+var data_for_sutta = require( path.join(__dirname, "../dbfixtures/events.js") );
+var data_for_bhutta = require( path.join(__dirname, "../dbfixtures/events.js") );
 
 
 var config = {
-  tableName: "sutta",
+  tables: ["sutta", "bhutta", "agarbatti"],
+  configs: []
   logQueries: true,
   ifNotExistsOverride: true,
 }
@@ -44,21 +46,16 @@ var msg = "";
 var fields = Object.keys( sampledata[0] );
 console.log("fields:", fields);
 
-knex.schema
-.dropTableIfExists( config.tableName )
-.then(function(){
+
 
   knex.schema
-  .createTable( config.tableName, function (table) {
+  .createTableIfNotExists( config.tableName, function (table) {
     _.each( fields, function( item ){
       table.string( item );
       console.log( "field-name:", item );
     })
-
-
   })
   .then(function(){
-
     knex( config.tableName )
     .insert( sampledata )
     .then(function(data){
@@ -67,13 +64,13 @@ knex.schema
     },
     function(error){
       console.log( error );
+    })
+    .finally(function(){
+      process.exit();
     });
-
-
-
   });
 
-})
+
 
 
 
