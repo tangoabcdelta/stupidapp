@@ -1,29 +1,29 @@
 extends layout
 
 block content
-
-
-  p bada bingo flamingo
+  p
+    b= title
   table(border=1, width='100%')
     tr
       td(colspan=3)
-        h1= title
-    tr
-      td(colspan=3)
-        p Bahaha #{title}
-    tr
-      td(width="10%")
         p
-          input#username(placeholder='user name', value='u0001')
+          input#username(placeholder='user name', value='Loretta')
         p
-          input#password(placeholder='password', type='password', value='foobar')
+          input#password(placeholder='password', type='password', value='avadakedavara')
         p
           button#login bufferpuffer
+    tr
+      td(width="10%") &nbsp;
       td
         div
-          full event list
-          p
-            button#show show
+          h3 full event list
+          ul
+            each eventitem in eventlist ? eventlist : ['No events to participate']
+              li
+                p= "Match Name:" + eventitem.event_name
+                p= "Type of match: " + eventitem.event_genre
+                p= "Host Country: " + eventitem.event_country
+                button(id=eventitem.event_name) participate
       td
 
 

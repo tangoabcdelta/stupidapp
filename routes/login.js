@@ -4,9 +4,11 @@ var knex = require('knex')({
   client: 'mysql',
   connection: {
     host     : '127.0.0.1',
-    user     : 'deveedutta',
+    // user     : 'deveedutta',
+    user     : 'root',
     password : '',
-    database : 'sattabazi'
+    // database : 'sattabazi'
+    database : 'new_schema'
     // ,
     // debug    : true
   }
@@ -17,9 +19,11 @@ router.post('/', function(req, res, next) {
   var userid = req.body['userid'];
   var pwd = req.body['pwd'];
 
-  knex.select().from('satta').where({
-    user_id: userid,
-    user_password: pwd
+  knex.select()
+  .from('sample_users')
+  .where({
+    user_first_name: userid,
+    password: pwd
   })
   .then(function(data){
     console.log( "=============" );
