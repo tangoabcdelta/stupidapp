@@ -5,13 +5,15 @@ block content
     b= title
   table(border=1, width='100%')
     tr
-      td(colspan=3)
+      td(colspan=2)
         p
           input#username(placeholder='user name', value='Loretta')
         p
           input#password(placeholder='password', type='password', value='avadakedavara')
         p
           button#login bufferpuffer
+      td(colspan=1, id="userDetails")
+
     tr
       td(width="10%") &nbsp;
       td
@@ -27,5 +29,6 @@ block content
       td
 
 
-  script(type='text/javascript')(src='javascripts/jquery-1.12.2.min.js')
+  script(type='text/javascript')(src='/vendor/jquery/dist/jquery.min.js')
+  script(type='text/javascript')(src='/vendor/lodash/dist/lodash.min.js')
   script(type='text/javascript')(src='javascripts/main.js')

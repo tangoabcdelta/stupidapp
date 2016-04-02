@@ -29,7 +29,8 @@ router.post('/', function(req, res, next) {
     console.log( "=============" );
     data = JSON.stringify(data);
     console.log( data );
-    res.send('respond with a resource' + data);
+    res.writeHead(200, {"Content-Type": "application/json"});
+    res.end(data);
   });
 });
 

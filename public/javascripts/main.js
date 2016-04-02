@@ -15,6 +15,11 @@ $(function(){
     .done(function(data) {
       alert( "success" );
       console.log( data );
+      data = JSON.parse(data);
+      var html = _.template("Hi, ${user}, welcome to stupid app")({
+        user: data['user_first_name']
+      })
+      $("#userDetails").html(html);
     })
     .fail(function(e) {
       console.log( "error", e );

@@ -1,0 +1,22 @@
+{
+  "name": "stupidapp",
+  "description": "",
+  "main": "",
+  "authors": [
+    "deveeduttam <deveeduttam@enixta.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/tangoabcdelta/stupidapp",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.2.2",
+    "lodash": "~4.7.0"
+  }
+}
