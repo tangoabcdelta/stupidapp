@@ -1,9 +1,23 @@
+var crypto = require("crypto-js");
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var knex = require('knex')({
+  client: 'mysql',
+  connection: {
+    host     : '127.0.0.1',
+    user     : 'root',
+    password : '',
+    database : 'new_schema'
+  }
+});
+var session = require("express-session");
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+
 
 var routes = require('./routes/index');
 var api = require('./routes/api');
@@ -23,6 +37,17 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(session({
+  genid: function(req) {
+    return crypto.HmacSHA1("alpha-bravo", "charlie-delta")
+  },
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: false,
+  proxy: true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
@@ -31,6 +56,10 @@ app.use('/users', users);
 app.use('/login', login);
 app.use('/wp-admin', wpadmin);
 
+var Account = require("./models/account");
+passport.use(new LocalStrategy(Account.authenticate()));
+passport.serializeUser(Account.serializeUser());
+passport.deserializeUser(Account.deserializeUser());
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

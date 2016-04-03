@@ -9,13 +9,12 @@ $(function(){
     var jqxhr = $.ajax({
       type: "POST",
       url: "/login",
-      dataType: "application/json",
+      // dataType: "application/json",
       data: _data
     })
     .done(function(data) {
-      alert( "success" );
+      data = data[0];
       console.log( data );
-      data = JSON.parse(data);
       var html = _.template("Hi, ${user}, welcome to stupid app")({
         user: data['user_first_name']
       })

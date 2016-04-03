@@ -16,11 +16,10 @@ var knex = require('knex')({
 
 var data_for_sutta = require( path.join(__dirname, "../dbfixtures/events.js") );
 var data_for_bhutta = require( path.join(__dirname, "../dbfixtures/events.js") );
-
+var sampledata = data_for_sutta;
 
 var config = {
-  tables: ["sutta", "bhutta", "agarbatti"],
-  configs: []
+  tableName: "sutta",
   logQueries: true,
   ifNotExistsOverride: true,
 }
