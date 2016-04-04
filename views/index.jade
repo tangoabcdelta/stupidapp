@@ -5,15 +5,17 @@ block content
     b= title
   table(border=1, width='100%')
     tr
-      td(colspan=2)
-        p
-          input#username(placeholder='user name', value='Loretta')
-        p
-          input#password(placeholder='password', type='password', value='avadakedavara')
-        p
-          button#login bufferpuffer
-      td(colspan=1, id="userDetails")
-
+      if isLoggedIn
+        td(colspan=3, id="userDetails") Hi, #{user}, welcome to stupid app"
+      else
+        td(colspan=3, id="userDetails")
+          p= isLoggedIn
+          p
+            input#username(placeholder='user name', value='Loretta')
+          p
+            input#password(placeholder='password', type='password', value='avadakedavara')
+          p
+            button#login bufferpuffer
     tr
       td(width="10%") &nbsp;
       td
@@ -25,7 +27,8 @@ block content
                 p= "Match Name:" + eventitem.event_name
                 p= "Type of match: " + eventitem.event_genre
                 p= "Host Country: " + eventitem.event_country
-                button(id=eventitem.event_name) participate
+                if isLoggedIn
+                  button(id=eventitem.event_name) participate
       td
 
 

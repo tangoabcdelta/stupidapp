@@ -22,7 +22,10 @@ router.get('/', function(req, res, next) {
     // console.log(data);
     res.render('index', {
       title: 'Express',
-      eventlist: data
+      eventlist: data,
+      isLoggedIn: true,
+      user: 'Lorrri'
+
     });
   })
 
