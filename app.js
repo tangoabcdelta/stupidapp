@@ -56,7 +56,10 @@ app.use('/users', users);
 app.use('/login', login);
 app.use('/wp-admin', wpadmin);
 
-// var Account = require("./models/account");
+var Account = require("./models/account");
+console.log("--------");
+Account(passport);
+console.log("--------");
 // passport.use(new LocalStrategy(Account.authenticate()));
 // passport.serializeUser(Account.serializeUser());
 // passport.deserializeUser(Account.deserializeUser());

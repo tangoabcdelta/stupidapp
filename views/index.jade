@@ -6,16 +6,17 @@ block content
   table(border=1, width='100%')
     tr
       if isLoggedIn
-        td(colspan=3, id="userDetails") Hi, #{user}, welcome to stupid app"
-      else
-        td(colspan=3, id="userDetails")
-          p= isLoggedIn
-          p
-            input#username(placeholder='user name', value='Loretta')
-          p
-            input#password(placeholder='password', type='password', value='avadakedavara')
-          p
-            button#login bufferpuffer
+        td(colspan=1, id="userDetails") Hi, #{user}, welcome to stupid app"
+        td(colspan=1) Fooooooo
+      
+      td(colspan=1, id="userDetails")
+        p= isLoggedIn
+        p
+          input#username(placeholder='user name', value='Loretta')
+        p
+          input#password(placeholder='password', type='password', value='avadakedavara')
+        p
+          button#login bufferpuffer
     tr
       td(width="10%") &nbsp;
       td
