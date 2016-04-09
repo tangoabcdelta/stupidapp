@@ -1,4 +1,5 @@
 var express = require('express');
+var session = require("express-session");
 var router = express.Router();
 var knex = require('knex')({
   client: 'mysql',
@@ -26,9 +27,12 @@ router.post('/', function(req, res, next) {
     password: pwd
   })
   .then(function(data){
-    console.log( "=============" );
+    // plonked http://scottksmith.com/blog/2014/09/04/simple-steps-to-secure-your-express-node-application/
     data = JSON.stringify(data);
     console.log( data );
+    req.session.user = userid;
+    res.cookie('sessionid', '1', { httpOnly: true, secure: true });
+    res.cookie('user', userid, { httpOnly: true, secure: true });
     res.writeHead(200, {"Content-Type": "application/json"});
     res.end(data);
   });

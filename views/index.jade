@@ -12,9 +12,9 @@ block content
       td(colspan=1, id="userDetails")
         p= isLoggedIn
         p
-          input#username(placeholder='user name', value='Loretta')
+          input(placeholder='user name', value='Loretta', name='username', id="username")
         p
-          input#password(placeholder='password', type='password', value='avadakedavara')
+          input(placeholder='password', type='password', value='avadakedavara', name="password", id="password")
         p
           button#login bufferpuffer
     tr
@@ -33,6 +33,6 @@ block content
       td
 
 
-  script(type='text/javascript')(src='/vendor/jquery/dist/jquery.min.js')
-  script(type='text/javascript')(src='/vendor/lodash/dist/lodash.min.js')
-  script(type='text/javascript')(src='javascripts/main.js')
+  script(type='text/javascript', src='/vendor/jquery/dist/jquery.min.js')
+  script(type='text/javascript', src='/vendor/lodash/dist/lodash.min.js')
+  script(type='text/javascript', src='javascripts/main.js')

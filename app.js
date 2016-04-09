@@ -56,12 +56,52 @@ app.use('/users', users);
 app.use('/login', login);
 app.use('/wp-admin', wpadmin);
 
-var Account = require("./models/account");
-console.log("--------");
-Account(passport);
-console.log("--------");
-// passport.use(new LocalStrategy(Account.authenticate()));
-// passport.serializeUser(Account.serializeUser());
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+passport.deserializeUser( function (id, done) {
+  connection.query( "select * from users where id = "+id, function(err,rows) { 
+    done(err, rows[0]);
+  });
+});
+
+passport.use('local-login', new LocalStrategy({
+    // by default, local strategy uses username and password, we will override with email
+    usernameField : 'username',
+    passwordField : 'password',
+    passReqToCallback : true // allows us to pass back the entire request to the callback
+  },
+  function(req, user_first_name, password, done) { // callback with email and password from our form
+    knex
+    .select()
+    .from("sample_users")
+    .where("user_first_name", user_first_name)
+    .then(function(data){
+      console.log("signed in", data);
+      if (!data.length) {
+        return done(null, false, req.flash('loginMessage', 'No user found.')); // req.flash is the way to set flashdata using connect-flash
+      }
+
+      
+      if (!( rows[0].password == password)){
+        // if the user is found but the password is wrong
+        return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
+      }
+        
+      // all is well, return successful user
+      return done(null, rows[0]);
+
+    }, function( err ){
+      return done(err);
+    })
+    .finally(function(e){
+      console.log("finally", e);
+      return done(e);
+    });
+
+
+    }));
+
 // passport.deserializeUser(Account.deserializeUser());
 
 // catch 404 and forward to error handler
