@@ -20,9 +20,13 @@ var knex = require('knex')({
 router.get('/', function(req, res, next) {
   console.log("req.session", req.session);
   var headers = _.get(req, "headers");
-  var fallbackUser = _.get(req, "cookies.user");
-  var user = _.get(req, "session.user", fallbackUser);
-  if(!user){
+  var username = _.get(req, "cookies.cuser");
+  console.log("req.cookies", req.cookies);
+  console.log("username", username);
+  // yanked from: https://github.com/expressjs/cookie-parser
+  // curl http://127.0.0.1:3000 --cookie "Cho=Kim;Greet=Hello"
+
+  if(!username){
     res.render('index', {
       title: 'Express',
       eventlist: [],
@@ -31,7 +35,7 @@ router.get('/', function(req, res, next) {
   } else {
     knex.select()
     .from('sample_users')
-    .where("user_first_name", user)
+    .where("user_first_name", username)
     .then(function(data){
       console.log("foo");
       if(data.length <= 0) return;
@@ -43,7 +47,7 @@ router.get('/', function(req, res, next) {
           title: 'Express',
           eventlist: data,
           isLoggedIn: true,
-          user: user
+          user: username
         });  
       })
       

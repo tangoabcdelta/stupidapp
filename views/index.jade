@@ -21,15 +21,15 @@ block content
       td(width="10%") &nbsp;
       td
         div
-          h3 full event list
+          h3 full food menu list
           ul
             each eventitem in eventlist ? eventlist : ['No events to participate']
               li
-                p= "Match Name:" + eventitem.event_name
-                p= "Type of match: " + eventitem.event_genre
-                p= "Host Country: " + eventitem.event_country
+                p= "Dish Name:" + eventitem.event_name
+                p= "Cuisine: " + eventitem.event_genre
+                p= "Dish Origin: " + eventitem.event_country
                 if isLoggedIn
-                  button(id=eventitem.event_name) participate
+                  button(id=eventitem.event_name) order dish
       td
 
 

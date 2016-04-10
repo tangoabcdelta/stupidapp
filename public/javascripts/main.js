@@ -2,8 +2,8 @@ $(function(){
   $("#login").on("click",function(){
     var _data = function(){
       return {
-        "userid": $("#username").val(),
-        "pwd": $("#password").val()
+        "username": $("#username").val(),
+        "password": $("#password").val()
       }
     }();
     var jqxhr = $.ajax({
@@ -13,15 +13,18 @@ $(function(){
       data: _data
     })
     .done(function(data) {
-      data = data[0];
-      console.log( data );
       var html = _.template("Hi, ${user}, welcome to stupid app")({
         user: data['user_first_name']
       })
       $("#userDetails").html(html);
+      window.setTimeout(function(){ window.location.reload(); },3000);
     })
     .fail(function(e) {
       console.log( "error", e );
+      var html = _.template("Houston, There is a problem: ${text}")({
+        text: e.responseText
+      })
+      $("#userDetails").html(html);
     })
     .always(function(e) {
       console.log( "complete", e );
